@@ -68,9 +68,7 @@ for i in range(S):
         if i > 0:
             i -= v
         A1 = tb[i].split(',')
-        # print(A1)
         B1.append(A1[0])
-        # print(B1)
         a1 = []
         b1 = []
         t1 = []
@@ -86,22 +84,12 @@ for i in range(S):
                 u += 1
                 S = len(tb)
 
-                # print("11")
                 if Q[1] == "a":
                     a1.append(Q[2])
-                    # print(a1)
-                    # print("1")
-                    # print(Q[2])
                 if Q[1] == "b":
                     b1.append(Q[2])
-                    # print(b1)
-                    # print("2")
-                    # print(Q[2])
                 if Q[1] == "_":
                     t1.append(Q[2])
-                    # print(t1)
-                    # print("3")
-                    # print(Q[2])
             else:
                 v += 1
                 break
@@ -109,10 +97,6 @@ for i in range(S):
         A.append(a1)
         B.append(b1)
         T.append(t1)
-
-
-
-
 
 print(A)
 print(B)
