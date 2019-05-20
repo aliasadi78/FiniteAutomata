@@ -43,12 +43,13 @@ for i in range(len(b)):
             start_state.append(d1[0])
 
 start_state = list(set(start_state))
-# print(start_state)
+h = start_state[0].replace('->','')
+start_state[0] = h
+print(start_state)
 
 a = b[2].replace('->','')
 b[2] = a
 bn = b
-
 b.remove(b[0])
 b.remove(b[0])
 print(b)
@@ -59,7 +60,7 @@ A1 = []
 B1 = []
 T1 = []
 
-tb = b
+tb = b.copy()
 S = len(tb)
 v = 0
 for i in range(S):
@@ -101,6 +102,25 @@ for i in range(S):
 print(A)
 print(B)
 print(T)
+T1 = []
+T2 = []
+for i in range(len(b)):
+    a = []
+    a = b[i].split(',')
+    if a[1] == '_':
+        T1.append(a[0])
+        T2.append(a[2])
+# print(T1)
+# print(T2)
+matrix = []
+matrixA = []
+matrixB = []
+matrix.append(start_state)
+# print(matrix)
+
+matrixA.append(A[0])
+# print(matrixA)
+
 
 
 
