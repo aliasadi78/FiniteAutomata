@@ -18,3 +18,15 @@ class NFA:
             self.States+=[new_node]
 
 
+Lines=open("input.txt",'r').readlines()
+Alphabet=Lines[1].replace('\n','').split(',')
+Alphabet.append("_")
+NFA=NFA(Alphabet,int(Lines[0]))
+print(Lines)
+for line in range(2,len(Lines)):
+    info=Lines[line].split(',')
+    origin_index=int(info[0].split('q')[1])
+    destination_index=int(info[2].replace('\n','').split('q')[1])
+    NFA.States[origin_index].Nueighbor[info[1]]+=[NFA.States[destination_index]]
+
+print(NFA.States)

@@ -116,10 +116,10 @@ matrix = []
 matrixA = []
 matrixB = []
 matrix.append(start_state)
-# print(matrix)
+print(matrix)
 
 matrixA.append(A[0])
-# print(matrixA)
+print(matrixA)
 
 
 
