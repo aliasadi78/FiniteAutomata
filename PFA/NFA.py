@@ -29,3 +29,4 @@ for line in range(2,len(Lines)):
     NFA.States[origin_index].Nueighbor[info[1]]+=[NFA.States[destination_index]]
 
 print(NFA.States)
+print(NFA.States[0].Nueighbor)
