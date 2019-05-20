@@ -22,7 +22,6 @@ Lines=open("input.txt",'r').readlines()
 Alphabet=Lines[1].replace('\n','').split(',')
 Alphabet.append("_")
 NFA=NFA(Alphabet,int(Lines[0]))
-print(Lines)
 for line in range(2,len(Lines)):
     info=Lines[line].split(',')
     origin_index=int(info[0].split('q')[1])
