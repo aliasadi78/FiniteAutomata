@@ -14,10 +14,7 @@ class queue:
             self.size -= 1
             return item
 
-
 "nodes for dfa and nfa state"
-
-
 class NODE:
     def __init__(self, name, Alphabet):
         "for dfa node"
@@ -31,53 +28,7 @@ class NODE:
         self.Final_state = bool()
         self.Name = name
 
-
-class Node_Dfa:
-    def __init__(self, name, Alphabet):
-        self.Nueighbor = dict()
-        for key in Alphabet:
-            self.Nueighbor[key] = []
-        self.Final_state = bool()
-        self.Name = name
-
-
-class NFA:
-    def __init__(self, Alphabet, Number_state):
-        self.Start_Variable = None
-        self.Alphabet = Alphabet
-        self.Number_State = Number_state
-        self.States = []
-        for number in range(Number_state):
-            name = 'q' + str(number)
-            new_node = NODE(name, self.Alphabet)
-            self.States += [new_node]
-
-
-class DFA:
-    def __init__(self, Alphabet):
-        self.Start_Variable = None
-        self.Alphabet = Alphabet
-        self.States = []
-        for number in range(len(self.States)):
-            name = 'q' + str(number)
-            new_node = NODE(name, self.Alphabet)
-            self.States += [new_node]
-
-
-Lines = open("input.txt", 'r').readlines()
-Alphabet = Lines[1].replace('\n', '').split(',')
-Alphabet2 = Alphabet.copy()
-Alphabet.append("_")
-
-NFA = NFA(Alphabet, int(Lines[0]))
-for line in range(2, len(Lines)):
-    info = Lines[line].split(',')
-    origin_index = int(info[0].split('q')[1])
-    destination_index = int(info[2].replace('\n', '').split('q')[1])
-    NFA.States[origin_index].Nueighbor[info[1]] += [NFA.States[destination_index]]
 "class for dfa and nfa"
-
-
 class Finite_Automata:
     def __init__(self, Alphabet, Number_state, dfa_or_nfa):
         self.Start_Variable = None
@@ -92,7 +43,6 @@ class Finite_Automata:
                 self.States += [new_node]
 
     "sort list of nodes for checking new_list==dfa_states[i] base of bubble sort"
-
     def sort_nodes_list(self, nodes_list):
         n = len(nodes_list)
 
@@ -109,7 +59,6 @@ class Finite_Automata:
                     nodes_list[j], nodes_list[j + 1] = nodes_list[j + 1], nodes_list[j]
 
     "lambda covert for find all lambda transition"
-
     def lambda_convert(self, states):
         state_queue = queue()
         for state in states:
@@ -123,7 +72,6 @@ class Finite_Automata:
         return states.copy()
 
     "symbol convert"
-
     def symbol_convert(self, states, symbol):
         result_list = []
         for state in states:
@@ -181,7 +129,7 @@ class Finite_Automata:
                     dfa.States += [new_node]
                     state_queue.enqueue(new_node)
                     current_node.Nueighbor[symbol] = new_node
-
+        # return dfa_states
 
 class App:
     def __init__(self, file_address):
@@ -218,9 +166,42 @@ class App:
                 result = state.Name + ',' + symbol + ',' + state.Nueighbor[symbol].Name
                 print(result)
 
-
 App = App("input.txt")
 App.creat_NFA()
 App.convert_NFA_to_DFA()
-App.print_DFA()
+
+DFA = App.DFA.States
+# App.print_DFA()
+print('    a',' b')
+for i in range(len(DFA)):
+    print('q', i , DFA[i].Nueighbor['a'].Name,DFA[i].Nueighbor['b'].Name)
+# print(App.DFA.States)
+# print('q', 0 , App.DFA.States[0].Nueighbor)
+# test = []
+# for state in App.DFA.States:
+#     if state != App.DFA.States[0]:
+#         for i in range(len(App.DFA.States)):
+#             if state != App.DFA.States[i].Nueighbor['a'] or state != App.DFA.States[i].Nueighbor['b']:
+#                 print(state,i)
+#                 test.append(i)
+
+Final_States = []
+Non_Final_States = []
+
+for i in range(len(DFA)):
+    if App.DFA.States[i].Final_state == True:
+        Final_States.append(App.DFA.States[i])
+    else:
+        Non_Final_States.append(App.DFA.States[i])
+g01 = Non_Final_States.copy()
+g02 = Final_States.copy()
+
+print(Final_States)
+print(Non_Final_States)
+
+
+
+
+
+
 
