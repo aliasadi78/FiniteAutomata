@@ -19,6 +19,7 @@ class NODE:
         self.nfa_states=[]
         "end dfa athribute"
         self.Nueighbor=dict()
+        "creat dict of transition for node"
         for key in Alphabet:
             self.Nueighbor[key]=[]
         self.Final_state=bool()
@@ -36,8 +37,22 @@ class Finite_Automata:
                 name='q'+str(number)
                 new_node=NODE(name,self.Alphabet)
                 self.States+=[new_node]
-
-    "lambda covert for convert nfa to dfa"
+    "sort list of nodes for checking new_list==dfa_states[i] base of bubble sort"
+    def sort_nodes_list(self,nodes_list):
+        n = len(nodes_list)
+     
+        # Traverse through all array elements
+        for i in range(n):
+     
+            # Last i elements are already in place
+            for j in range(0, n-i-1):
+     
+                # traverse the array from 0 to n-i-1
+                # Swap if the element found is greater
+                # than the next element
+                if nodes_list[j].Name > nodes_list[j+1].Name :
+                    nodes_list[j], nodes_list[j+1] = nodes_list[j+1], nodes_list[j]
+    "lambda covert for find all lambda transition"
     def lambda_convert(self,states):
         state_queue=queue()
         for state in states:
@@ -47,9 +62,7 @@ class Finite_Automata:
             for state in current_state.Nueighbor['_']:
                 if state not in states:
                     state_queue.enqueue(state)
-                    states+=[state]
-                    
-            
+                    states+=[state]   
         return states.copy()
 
     
@@ -65,17 +78,21 @@ class Finite_Automata:
 
     def convert_nfa_to_dfa(self,dfa):
         dfa_states=[]
+        "add start varieble and lambda transition to dfa state"
         dfa_states+=[self.lambda_convert([self.Start_Variable])]
-        print(dfa_states)
-        "creat dfa node"
+        "sort all of nodes list"
+        self.sort_nodes_list(dfa_states[0])
+        #print(dfa_states)
+        "creat first dfa node"
         number_dfa_nodes=0
-        name="g0"
+        name="q0"
         new_dfa_node=NODE(name,dfa.Alphabet)
         dfa.Start_Variable=new_dfa_node
         new_dfa_node.nfa_states=dfa_states[0]
         "add new state to dfa states"
         dfa.States+=[new_dfa_node]
         "end creat"
+        "creat queue to check"
         state_queue=queue()
         state_queue.enqueue(new_dfa_node)
         "add one by one dfa states to queue and find this transiton"
@@ -83,24 +100,24 @@ class Finite_Automata:
         while state_queue.size > 0:
             current_node=state_queue.dequeue()
             for symbol in dfa.Alphabet:
-                j+=1
+                #j+=1
                 creat_new_node=True
-                for state in current_node.nfa_states:
-                    print(state.Name)
+                #for state in current_node.nfa_states:
+                    #print(state.Name)
                 new_list=self.symbol_convert(current_node.nfa_states,symbol).copy()
                 new_list=self.lambda_convert(new_list).copy()
-                new_list.sort()
+                self.sort_nodes_list(new_list)
                 for i in range(number_dfa_nodes+1):
                     if new_list==dfa_states[i]:
-                        print("*****************"+str(j))
+                        #print("*****************"+str(j))
                         current_node.Nueighbor[symbol]=dfa.States[i]
                         creat_new_node=False
                         break
                 if creat_new_node:
-                    print(j)
+                    #print(j)
                     number_dfa_nodes+=1
-                    name="g"+str(number_dfa_nodes)
-                    "print(number_dfa_nodes)"
+                    name="q"+str(number_dfa_nodes)
+                    #print(number_dfa_nodes)
                     new_node=NODE(name,dfa.Alphabet)
                     dfa_states+=[new_list.copy()]
                     new_node.nfa_states=new_list.copy()
@@ -110,23 +127,41 @@ class Finite_Automata:
                     
                 
 
+class App:
+    def __init__(self,file_address):
+        self.file_address=file_address
+        self.NFA=None
+        self.DFA=None
+        self.Alphabet=None
+    def creat_NFA(self):
+        Lines=open(self.file_address,'r').readlines()
+        self.Alphabet=Lines[1].replace('\n','').split(',')
+        NFA_Alphabet=self.Alphabet+["_"]
+        self.NFA=Finite_Automata(NFA_Alphabet,int(Lines[0]),'nfa')
+        self.NFA.Start_Variable=self.NFA.States[0]
+        "complete nfa"
+        for line in range(2,len(Lines)):
+            info=Lines[line].split(',')
+            origin_index=int(info[0].split('q')[1])
+            destination_index=int(info[2].replace('\n','').split('q')[1])
+            self.NFA.States[origin_index].Nueighbor[info[1]]+=[self.NFA.States[destination_index]]
+            "final states"
+            if "*" in info[0]:
+                self.NFA.States[origin_index].Final_State=True
+            if "*" in info[2]:
+                self.NFA.States[destination_index].Final_State=True
+        
+    def convert_NFA_to_DFA(self):
+        self.DFA=Finite_Automata(self.Alphabet,0,'dfa')
+        self.NFA.convert_nfa_to_dfa(self.DFA)
 
+    def print_DFA(self):
+        for state in self.DFA.States:
+            for symbol in self.Alphabet:
+                result=state.Name+','+symbol+','+state.Nueighbor[symbol].Name
+                print(result)
 
-Lines=open("input.txt",'r').readlines()
-DFA_Alphabet=Lines[1].replace('\n','').split(',')
-NFA_Alphabet=DFA_Alphabet+["_"]
-NFA=Finite_Automata(NFA_Alphabet,int(Lines[0]),'nfa')
-DFA=Finite_Automata(DFA_Alphabet,0,'dfa')
-"complete nfa"
-for line in range(2,len(Lines)):
-    info=Lines[line].split(',')
-    origin_index=int(info[0].split('q')[1])
-    destination_index=int(info[2].replace('\n','').split('q')[1])
-    NFA.States[origin_index].Nueighbor[info[1]]+=[NFA.States[destination_index]]
-
-"convert nfa to dfa"
-print(NFA.States)
-NFA.Start_Variable=NFA.States[0]
-NFA.convert_nfa_to_dfa(DFA)
-
-
+App=App("input.txt")
+App.creat_NFA()
+App.convert_NFA_to_DFA()
+App.print_DFA()
