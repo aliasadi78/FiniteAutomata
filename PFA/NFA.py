@@ -122,8 +122,10 @@ class Finite_Automata:
                     dfa.States+=[new_node]
                     state_queue.enqueue(new_node)
                     current_node.Nueighbor[symbol]=new_node
-                    
-                
+                    for state in new_node.nfa_states:
+                        if state.Final_state:
+                            new_node.Final_state=True
+                            break                                
 
 class App:
     def __init__(self,file_address):
@@ -145,9 +147,9 @@ class App:
             self.NFA.States[origin_index].Nueighbor[info[1]]+=[self.NFA.States[destination_index]]
             "final states"
             if "*" in info[0]:
-                self.NFA.States[origin_index].Final_State=True
+                self.NFA.States[origin_index].Final_state=True
             if "*" in info[2]:
-                self.NFA.States[destination_index].Final_State=True
+                self.NFA.States[destination_index].Final_state=True
         
     def convert_NFA_to_DFA(self):
         self.DFA=Finite_Automata(self.Alphabet,0,'dfa')
