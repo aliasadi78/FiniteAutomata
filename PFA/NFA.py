@@ -129,7 +129,11 @@ class Finite_Automata:
                     dfa.States += [new_node]
                     state_queue.enqueue(new_node)
                     current_node.Nueighbor[symbol] = new_node
-        # return dfa_states
+                    for state in new_node.nfa_states:
+                        if state.Final_state:
+                            new_node.Final_state = True
+                            break
+                            # return dfa_states
 
 class App:
     def __init__(self, file_address):
@@ -152,9 +156,9 @@ class App:
             self.NFA.States[origin_index].Nueighbor[info[1]] += [self.NFA.States[destination_index]]
             "final states"
             if "*" in info[0]:
-                self.NFA.States[origin_index].Final_State = True
+                self.NFA.States[origin_index].Final_state = True
             if "*" in info[2]:
-                self.NFA.States[destination_index].Final_State = True
+                self.NFA.States[destination_index].Final_state = True
 
     def convert_NFA_to_DFA(self):
         self.DFA = Finite_Automata(self.Alphabet, 0, 'dfa')
@@ -169,21 +173,12 @@ class App:
 App = App("input.txt")
 App.creat_NFA()
 App.convert_NFA_to_DFA()
-
-DFA = App.DFA.States
 # App.print_DFA()
+DFA = App.DFA.States
+
 print('    a',' b')
 for i in range(len(DFA)):
-    print('q', i , DFA[i].Nueighbor['a'].Name,DFA[i].Nueighbor['b'].Name)
-# print(App.DFA.States)
-# print('q', 0 , App.DFA.States[0].Nueighbor)
-# test = []
-# for state in App.DFA.States:
-#     if state != App.DFA.States[0]:
-#         for i in range(len(App.DFA.States)):
-#             if state != App.DFA.States[i].Nueighbor['a'] or state != App.DFA.States[i].Nueighbor['b']:
-#                 print(state,i)
-#                 test.append(i)
+    print(DFA[i].Name, DFA[i].Nueighbor['a'].Name,DFA[i].Nueighbor['b'].Name)
 
 Final_States = []
 Non_Final_States = []
@@ -193,11 +188,33 @@ for i in range(len(DFA)):
         Final_States.append(App.DFA.States[i])
     else:
         Non_Final_States.append(App.DFA.States[i])
+
 g01 = Non_Final_States.copy()
 g02 = Final_States.copy()
 
-print(Final_States)
-print(Non_Final_States)
+for i in range(len(DFA)):
+    if DFA[i].Nueighbor['a'] in g01:
+        DFA[i].Nueighbor['a'] = 'g01'
+    if DFA[i].Nueighbor['a'] in g02:
+        DFA[i].Nueighbor['a']= 'g02'
+    if DFA[i].Nueighbor['b'] in g01:
+        DFA[i].Nueighbor['b'] = 'g01'
+    if DFA[i].Nueighbor['b'] in g02:
+        DFA[i].Nueighbor['b'] = 'g02'
+
+print('      a','  b')
+print('   ','---------')
+for i in range(len(g01)):
+    print(g01[i].Name,'|', g01[i].Nueighbor['a'],g01[i].Nueighbor['b'],'|')
+print('   ','---------')
+for i in range(len(g02)):
+    print(g02[i].Name,'|',g02[i].Nueighbor['a'],g02[i].Nueighbor['b'],'|')
+print('   ','---------')
+
+# for i in range(len(g01)):
+#     for j in range(1,len(g01)):
+#         if g01[i].Nueighbor['a'] != g01[j].Nueighbor['a']:
+#             queue.enqueue(g01[j].Nueighbor['a'])
 
 
 
