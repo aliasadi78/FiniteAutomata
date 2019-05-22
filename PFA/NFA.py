@@ -20,9 +20,7 @@ class NODE:
         "end dfa athribute"
         self.Nueighbor=dict()
         "creat dict of transition for node"
-        for key in Alphabet:
-            self.Nueighbor[key]=[]
-        self.Final_state=bool()
+        self.Nueighbor = dict()
         self.Name=name
 "class for dfa and nfa"
 class Finite_Automata:
