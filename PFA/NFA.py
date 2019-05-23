@@ -173,6 +173,7 @@ class App:
                 print(result)
 
 App = App("input.txt")
+# App = App("test.txt")
 App.creat_NFA()
 App.convert_NFA_to_DFA()
 # App.print_DFA()
