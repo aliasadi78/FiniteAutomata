@@ -185,12 +185,12 @@ for i in range(len(DFA)):
 Final_States = []
 Non_Final_States = []
 l = 0
-# for i in range(len(DFA)):
-#     if DFA[i].Final_state == True:
-#         DFA[i].Tag = 'g' + str(l) + '2'
-#     else:
-#         DFA[i].Tag = 'g' + str(l) + '1'
-# Tags = ['g01','g02']
+for i in range(len(DFA)):
+    if DFA[i].Final_state == True:
+        DFA[i].Tag = 'g' + str(l) + '2'
+    else:
+        DFA[i].Tag = 'g' + str(l) + '1'
+Tags = ['g01','g02']
 # for i in range(len(DFA)):
 #     if App.DFA.States[i].Final_state == True:
 #         Final_States.append(App.DFA.States[i])
@@ -208,15 +208,15 @@ l = 0
 #         DFA[i].Nueighbor['b'] = 'g01'
 #     if DFA[i].Nueighbor['b'] in g02:
 #         DFA[i].Nueighbor['b'] = 'g02'
-# for i in range(len(DFA)):
-#     if DFA[i].Nueighbor['a'].Tag == Tags[0]:
-#         DFA[i].Nueighbor['a'] = Tags[0]
-#     elif DFA[i].Nueighbor['a'].Tag == Tags[1]:
-#         DFA[i].Nueighbor['a'] = Tags[1]
-#     if DFA[i].Nueighbor['b'].Tag == Tags[0]:
-#         DFA[i].Nueighbor['b'] = Tags[0]
-#     elif DFA[i].Nueighbor['b'].Tag == Tags[1]:
-#         DFA[i].Nueighbor['b'] = Tags[1]
+for i in range(len(DFA)):
+    if DFA[i].Nueighbor['a'].Tag == Tags[0]:
+        DFA[i].Nueighbor['a'] = Tags[0]
+    elif DFA[i].Nueighbor['a'].Tag == Tags[1]:
+        DFA[i].Nueighbor['a'] = Tags[1]
+    if DFA[i].Nueighbor['b'].Tag == Tags[0]:
+        DFA[i].Nueighbor['b'] = Tags[0]
+    elif DFA[i].Nueighbor['b'].Tag == Tags[1]:
+        DFA[i].Nueighbor['b'] = Tags[1]
 #
 #
 # print('      a','  b','   tag')
@@ -242,7 +242,7 @@ Tags = []
 def tag():
     tags = Tags.copy()
     Tags.clear()
-    v = 0
+    v = 1
     l = 1
     S = len(States)
     for i in range(S):
@@ -335,6 +335,6 @@ print('   ','---------')
 for j in range(len(Tags)):
     for i in range(len(DFA)):
         if DFA[i].Tag == Tags[j]:
-            print(DFA[i].Name,'|',DFA[i].Nueighbor['a'].Name,DFA[i].Nueighbor['b'].Name,'|',DFA[i].Tag)
+            print(DFA[i].Name,'|',DFA[i].Nueighbor['a'],DFA[i].Nueighbor['b'],'|',DFA[i].Tag)
     print('   ','---------')
 

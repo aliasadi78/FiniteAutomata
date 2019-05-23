@@ -15,7 +15,7 @@
     <SUITE FILE_PATH="coverage/PFA$pfa.coverage" NAME="pfa Coverage Results" MODIFIED="1558346386772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PFA$q.coverage" NAME="q Coverage Results" MODIFIED="1558611732357" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../.." />
     <SUITE FILE_PATH="coverage/PFA$dfa.coverage" NAME="dfa Coverage Results" MODIFIED="1558458293348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../../New folder/dfa-minimization" />
-    <SUITE FILE_PATH="coverage/PFA$NFA.coverage" NAME="NFA Coverage Results" MODIFIED="1558615111116" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PFA$NFA.coverage" NAME="NFA Coverage Results" MODIFIED="1558616746201" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="PFA" />
@@ -52,8 +52,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NFA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2543">
-              <caret line="174" column="16" selection-start-line="174" selection-start-column="16" selection-end-line="174" selection-end-column="16" />
+            <state relative-caret-position="279">
+              <caret line="250" column="51" lean-forward="true" selection-start-line="250" selection-start-column="51" selection-end-line="250" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -247,7 +247,7 @@
       <workItem from="1558088933894" duration="13084000" />
       <workItem from="1558207185405" duration="30424000" />
       <workItem from="1558518326208" duration="9840000" />
-      <workItem from="1558556129573" duration="16048000" />
+      <workItem from="1558556129573" duration="17073000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1558089012688</created>
@@ -382,11 +382,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558578900642</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="tag">
+      <created>1558615151966</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1558615151967</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69396000" />
+    <option name="totallyTimeSpent" value="70421000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -448,7 +455,8 @@
     <MESSAGE value="G01" />
     <MESSAGE value="0606" />
     <MESSAGE value="0704" />
-    <option name="LAST_COMMIT_MESSAGE" value="0704" />
+    <MESSAGE value="tag" />
+    <option name="LAST_COMMIT_MESSAGE" value="tag" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -553,8 +561,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/NFA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2543">
-          <caret line="174" column="16" selection-start-line="174" selection-start-column="16" selection-end-line="174" selection-end-column="16" />
+        <state relative-caret-position="279">
+          <caret line="250" column="51" lean-forward="true" selection-start-line="250" selection-start-column="51" selection-end-line="250" selection-end-column="51" />
         </state>
       </provider>
     </entry>
