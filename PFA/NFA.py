@@ -192,15 +192,6 @@ for i in range(len(DFA)):
         DFA[i].Tag = 'g' + str(l) + '1'
 Tags = ['g01','g02']
 
-# for i in range(len(DFA)):
-#     if DFA[i].Nueighbor['a'].Tag == Tags[0]:
-#         DFA[i].Nueighbor['a'] = Tags[0]
-#     elif DFA[i].Nueighbor['a'].Tag == Tags[1]:
-#         DFA[i].Nueighbor['a'] = Tags[1]
-#     if DFA[i].Nueighbor['b'].Tag == Tags[0]:
-#         DFA[i].Nueighbor['b'] = Tags[0]
-#     elif DFA[i].Nueighbor['b'].Tag == Tags[1]:
-#         DFA[i].Nueighbor['b'] = Tags[1]
 l = 1
 
 States = DFA.copy()
@@ -236,28 +227,9 @@ def tag():
     for i in range(len(DFA)):
         DFA[i].Nueighbor['a'] = DFA[i].Nueighbor['a'].Tag
         DFA[i].Nueighbor['b'] = DFA[i].Nueighbor['b'].Tag
-    # for j in range(len(Tags)):
-    #     for i in range(len(DFA)):
-    #         if DFA[i].Nueighbor['a'].Tag == Tags[j]:
-    #             DFA[i].Nueighbor['a'] = Tags[j]
-    #         if DFA[i].Nueighbor['b'].Tag == Tags[j]:
-    #             DFA[i].Nueighbor['b'] = Tags[j]
 
 tag()
-# print(Tags)
-#
-# print('      a','  b',' tag')
-# print('   ','-------')
-# for j in range(len(Tags)):
-#     for i in range(len(DFA)):
-#         if DFA[i].Tag == Tags[j]:
-#             print(DFA[i].Name,'|',DFA[i].Nueighbor['a'],DFA[i].Nueighbor['b'],'|',DFA[i].Tag)
-#     print('   ','-------')
-# print(DFA[4].Nueighbor['a'])
 
-# for i in range(len(DFA)):
-#     DFA[i].Nueighbor['a'] = DFA[i].Nueighbor['a'].Tag
-#     DFA[i].Nueighbor['b'] = DFA[i].Nueighbor['b'].Tag
 print('      a','  b','   tag')
 print('   ','---------')
 for j in range(len(Tags)):
