@@ -224,9 +224,9 @@ App.print_DFA()
 
 DFA = App.DFA.States
 
-# print('    a', ' b')
-# for i in range(len(DFA)):
-#     print(DFA[i].Name, DFA[i].Nueighbor['a'].Name, DFA[i].Nueighbor['b'].Name)
+print('    a', ' b')
+for i in range(len(DFA)):
+    print(DFA[i].Name, DFA[i].Nueighbor['a'].Name, DFA[i].Nueighbor['b'].Name)
 
 Final_States = []
 Non_Final_States = []
