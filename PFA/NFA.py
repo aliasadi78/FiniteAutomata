@@ -24,6 +24,7 @@ class NODE:
             self.Nueighbor[key]=[]
         self.Final_state=False
         self.Name=name
+        self.Tag=''
 
 
 
@@ -230,30 +231,96 @@ App.convert_NFA_to_DFA()
 App.print_DFA()
 
 DFA = App.DFA.States
-# App.print_DFA()
+
 print('    a',' b')
 for i in range(len(DFA)):
-    print('q', i , DFA[i].Nueighbor['a'].Name,DFA[i].Nueighbor['b'].Name)
-# print(App.DFA.States)
-# print('q', 0 , App.DFA.States[0].Nueighbor)
-# test = []
-# for state in App.DFA.States:
-#     if state != App.DFA.States[0]:
-#         for i in range(len(App.DFA.States)):
-#             if state != App.DFA.States[i].Nueighbor['a'] or state != App.DFA.States[i].Nueighbor['b']:
-#                 print(state,i)
-#                 test.append(i)
+    print(DFA[i].Name, DFA[i].Nueighbor['a'].Name,DFA[i].Nueighbor['b'].Name)
 
 Final_States = []
 Non_Final_States = []
-
+l = 0
 for i in range(len(DFA)):
-    if App.DFA.States[i].Final_state == True:
-        Final_States.append(App.DFA.States[i])
+    if DFA[i].Final_state == True:
+        DFA[i].Tag = 'g' + str(l) + '2'
     else:
-        Non_Final_States.append(App.DFA.States[i])
-g01 = Non_Final_States.copy()
-g02 = Final_States.copy()
+        DFA[i].Tag = 'g' + str(l) + '1'
+Tags = ['g01','g02']
 
-print(Final_States)
-print(Non_Final_States)
+l = 1
+
+States = DFA.copy()
+St = DFA.copy()
+# print(States)
+Tags = []
+def tag():
+    tags = Tags.copy()
+    Tags.clear()
+    v = 1
+    l = 1
+    S = len(States)
+    for i in range(S):
+        for j in range(i,S):
+            if i != j:
+                if States[i].Tag == States[j].Tag :
+                    if States[i].Nueighbor['a'] == States[j].Nueighbor['a'] and States[i].Nueighbor['b'] == States[j].Nueighbor['b']:
+                        States[i].Tag = 'g' + str(v) + str(l)
+                        Tags.append(States[i].Tag)
+                        States[j].Tag = 'g' + str(v) + str(l)
+                        States.remove(States[i])
+                        States.insert(i,'1')
+                        States.remove(States[j])
+                        States.remove('1')
+                        St.remove(St[j])
+                        l += 1
+                        S -= 2
+
+    for i in range(len(States)):
+        States[i].Tag = 'g' + str(v) + str(l)
+        Tags.append(States[i].Tag)
+        l += 1
+    for i in range(len(DFA)):
+        DFA[i].Nueighbor['a'] = DFA[i].Nueighbor['a'].Tag
+        DFA[i].Nueighbor['b'] = DFA[i].Nueighbor['b'].Tag
+
+tag()
+
+print('      a','  b','   tag')
+print('   ','---------')
+for j in range(len(Tags)):
+    for i in range(len(DFA)):
+        if DFA[i].Tag == Tags[j]:
+            print(DFA[i].Name,'|',DFA[i].Nueighbor['a'],DFA[i].Nueighbor['b'],'|',DFA[i].Tag)
+    print('   ','---------')
+
+
+for i in range(len(St)):
+    St[i].Name = 'g' + str(i + 1)
+
+
+print('      a','  b','   tag')
+print('   ','---------')
+for j in range(len(Tags)):
+    for i in range(len(St)):
+        if St[i].Tag == Tags[j]:
+            print(St[i].Name,'|',St[i].Nueighbor['a'],St[i].Nueighbor['b'],'|',St[i].Tag)
+    print('   ','---------')
+for i in range(len(St)):
+    for j in range(len(St)):
+        if St[i].Nueighbor['a'] == St[j].Tag:
+            St[i].Nueighbor['a'] = St[j].Name
+        if St[i].Nueighbor['b'] == St[j].Tag:
+            St[i].Nueighbor['b'] = St[j].Name
+
+print('      a','  b')
+print('   ','-------')
+for j in range(len(Tags)):
+    for i in range(len(St)):
+        if St[i].Tag == Tags[j]:
+            print(St[i].Name,'|',St[i].Nueighbor['a'],St[i].Nueighbor['b'])
+    print('   ','-------')
+Alphabet = ['a','b']
+
+for i in range(len(St)):
+    for sy in Alphabet:
+        result = St[i].Name + ',' + sy + ',' + St[i].Nueighbor[sy]
+        print(result)
