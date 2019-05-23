@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0aa7b73-64d5-46a9-b083-7ec06e06ec83" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/NFA.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,7 +14,7 @@
     <SUITE FILE_PATH="coverage/PFA$pfa.coverage" NAME="pfa Coverage Results" MODIFIED="1558346386772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PFA$q.coverage" NAME="q Coverage Results" MODIFIED="1558611732357" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../.." />
     <SUITE FILE_PATH="coverage/PFA$dfa.coverage" NAME="dfa Coverage Results" MODIFIED="1558458293348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../../New folder/dfa-minimization" />
-    <SUITE FILE_PATH="coverage/PFA$NFA.coverage" NAME="NFA Coverage Results" MODIFIED="1558616746201" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PFA$NFA.coverage" NAME="NFA Coverage Results" MODIFIED="1558621249736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="PFA" />
@@ -53,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/NFA.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="279">
-              <caret line="250" column="51" lean-forward="true" selection-start-line="250" selection-start-column="51" selection-end-line="250" selection-end-column="51" />
+              <caret line="298" column="46" selection-start-line="298" selection-start-column="46" selection-end-line="298" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -247,7 +246,7 @@
       <workItem from="1558088933894" duration="13084000" />
       <workItem from="1558207185405" duration="30424000" />
       <workItem from="1558518326208" duration="9840000" />
-      <workItem from="1558556129573" duration="17073000" />
+      <workItem from="1558556129573" duration="21542000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1558089012688</created>
@@ -389,11 +388,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558615151967</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="['g11', 'g12', 'g13', 'g14']&#10;      a   b    tag&#10;    ---------&#10;q0 | g01 g02 | g11&#10;q4 | g01 g02 | g11&#10;    ---------&#10;q1 | g02 g02 | g12&#10;    ---------&#10;q2 | g02 g01 | g13&#10;    ---------&#10;q3 | g02 g02 | g14&#10;    ---------">
+      <created>1558616791176</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1558616791176</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70421000" />
+    <option name="totallyTimeSpent" value="74890000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -456,65 +462,76 @@
     <MESSAGE value="0606" />
     <MESSAGE value="0704" />
     <MESSAGE value="tag" />
-    <option name="LAST_COMMIT_MESSAGE" value="tag" />
+    <MESSAGE value="['g11', 'g12', 'g13', 'g14']&#10;      a   b    tag&#10;    ---------&#10;q0 | g01 g02 | g11&#10;q4 | g01 g02 | g11&#10;    ---------&#10;q1 | g02 g02 | g12&#10;    ---------&#10;q2 | g02 g01 | g13&#10;    ---------&#10;q3 | g02 g02 | g14&#10;    ---------" />
+    <option name="LAST_COMMIT_MESSAGE" value="['g11', 'g12', 'g13', 'g14']&#10;      a   b    tag&#10;    ---------&#10;q0 | g01 g02 | g11&#10;q4 | g01 g02 | g11&#10;    ---------&#10;q1 | g02 g02 | g12&#10;    ---------&#10;q2 | g02 g01 | g13&#10;    ---------&#10;q3 | g02 g02 | g14&#10;    ---------" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/NFA.py</url>
-          <line>334</line>
+          <line>250</line>
           <option name="timeStamp" value="93" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/NFA.py</url>
-          <line>337</line>
+          <line>253</line>
           <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/NFA.py</url>
-          <line>336</line>
+          <line>252</line>
           <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/NFA.py</url>
-          <line>335</line>
+          <line>251</line>
           <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/NFA.py</url>
-          <line>338</line>
+          <line>254</line>
           <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/NFA.py</url>
-          <line>266</line>
+          <line>238</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/NFA.py</url>
-          <line>267</line>
+          <line>239</line>
           <option name="timeStamp" value="100" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/NFA.py</url>
-          <line>268</line>
+          <line>240</line>
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/NFA.py</url>
-          <line>269</line>
+          <line>241</line>
           <option name="timeStamp" value="102" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/NFA.py</url>
-          <line>270</line>
+          <line>242</line>
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/NFA.py</url>
-          <line>271</line>
+          <line>243</line>
           <option name="timeStamp" value="104" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NFA.py</url>
+          <line>246</line>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NFA.py</url>
+          <line>248</line>
+          <option name="timeStamp" value="106" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -562,7 +579,7 @@
     <entry file="file://$PROJECT_DIR$/NFA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
-          <caret line="250" column="51" lean-forward="true" selection-start-line="250" selection-start-column="51" selection-end-line="250" selection-end-column="51" />
+          <caret line="298" column="46" selection-start-line="298" selection-start-column="46" selection-end-line="298" selection-end-column="46" />
         </state>
       </provider>
     </entry>
