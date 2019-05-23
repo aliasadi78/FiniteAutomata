@@ -27,6 +27,7 @@ class NODE:
             self.Nueighbor[key] = []
         self.Final_state = bool()
         self.Name = name
+        self.Tag = ''
 
 "class for dfa and nfa"
 class Finite_Automata:
@@ -35,6 +36,7 @@ class Finite_Automata:
         self.Alphabet = Alphabet
         self.Number_State = Number_state
         self.States = []
+
         "build states for nfa and add to self.states"
         if dfa_or_nfa == "nfa":
             for number in range(Number_state):
@@ -182,7 +184,13 @@ for i in range(len(DFA)):
 
 Final_States = []
 Non_Final_States = []
-
+l = 0
+for i in range(len(DFA)):
+    if DFA[i].Final_state == True:
+        DFA[i].Tag = 'g' + str(l) + '2'
+    else:
+        DFA[i].Tag = 'g' + str(l) + '1'
+Tags = ['g01','g02']
 for i in range(len(DFA)):
     if App.DFA.States[i].Final_state == True:
         Final_States.append(App.DFA.States[i])
@@ -191,34 +199,87 @@ for i in range(len(DFA)):
 
 g01 = Non_Final_States.copy()
 g02 = Final_States.copy()
-
+# for i in range(len(DFA)):
+#     if DFA[i].Nueighbor['a'] in g01:
+#         DFA[i].Nueighbor['a'] = 'g01'
+#     if DFA[i].Nueighbor['a'] in g02:
+#         DFA[i].Nueighbor['a']= 'g02'
+#     if DFA[i].Nueighbor['b'] in g01:
+#         DFA[i].Nueighbor['b'] = 'g01'
+#     if DFA[i].Nueighbor['b'] in g02:
+#         DFA[i].Nueighbor['b'] = 'g02'
 for i in range(len(DFA)):
-    if DFA[i].Nueighbor['a'] in g01:
-        DFA[i].Nueighbor['a'] = 'g01'
-    if DFA[i].Nueighbor['a'] in g02:
-        DFA[i].Nueighbor['a']= 'g02'
-    if DFA[i].Nueighbor['b'] in g01:
-        DFA[i].Nueighbor['b'] = 'g01'
-    if DFA[i].Nueighbor['b'] in g02:
-        DFA[i].Nueighbor['b'] = 'g02'
+    if DFA[i].Nueighbor['a'].Tag == Tags[0]:
+        DFA[i].Nueighbor['a'] = Tags[0]
+    elif DFA[i].Nueighbor['a'].Tag == Tags[1]:
+        DFA[i].Nueighbor['a'] = Tags[1]
+    if DFA[i].Nueighbor['b'].Tag == Tags[0]:
+        DFA[i].Nueighbor['b'] = Tags[0]
+    elif DFA[i].Nueighbor['b'].Tag == Tags[1]:
+        DFA[i].Nueighbor['b'] = Tags[1]
 
-print('      a','  b')
+
+print('      a','  b','   tag')
 print('   ','---------')
-for i in range(len(g01)):
-    print(g01[i].Name,'|', g01[i].Nueighbor['a'],g01[i].Nueighbor['b'],'|')
+for i in range(len(DFA)):
+    if DFA[i].Tag == Tags[0]:
+        print(DFA[i].Name,'|', DFA[i].Nueighbor['a'],DFA[i].Nueighbor['b'],'|',DFA[i].Tag)
 print('   ','---------')
-for i in range(len(g02)):
-    print(g02[i].Name,'|',g02[i].Nueighbor['a'],g02[i].Nueighbor['b'],'|')
+for i in range(len(DFA)):
+    if DFA[i].Tag == Tags[1]:
+        print(DFA[i].Name,'|',DFA[i].Nueighbor['a'],DFA[i].Nueighbor['b'],'|',DFA[i].Tag)
 print('   ','---------')
 
 # for i in range(len(g01)):
 #     for j in range(1,len(g01)):
 #         if g01[i].Nueighbor['a'] != g01[j].Nueighbor['a']:
 #             queue.enqueue(g01[j].Nueighbor['a'])
+l = 1
 
 
 
+def tag():
+    l = 1
+    v = 1
+    tags = Tags.copy()
+    Tags.clear()
+    DFA[0].Tag = 'g' + str(l)
+    Tags.append(DFA[0].Tag)
+    for tag in tags:
+        for i in range(len(DFA)):
+            for j in range(i,len(DFA)):
+                if tag == DFA[i].Tag :
+                    if i != j:
+                        if DFA[i].Nueighbor['a'] == DFA[j].Nueighbor['a'] and DFA[i].Nueighbor['b'] == DFA[j].Nueighbor['b']:
+                            Tags.append('1')
+                            l = len(Tags)
+                            DFA[i].Tag = 'g' + str(l)
+                            DFA[j].Tag = 'g' + str(l)
+                            Tags.append(DFA[i].Tag)
+                            Tags.remove('1')
+                            # print(DFA[i].Tag, DFA[j].Tag)
+                        if DFA[i].Nueighbor['a'] != DFA[j].Nueighbor['a'] or DFA[i].Nueighbor['b'] != DFA[j].Nueighbor['b']:
+                            Tags.append('2')
+                            l = len(Tags)
+                            DFA[j].Tag = 'g' + str(l)
+                            Tags.append(DFA[j].Tag)
+                            Tags.remove('2')
+    # print(DFA)
 
+    print(Tags)
+tag()
+
+
+print('      a','  b','   tag')
+print('   ','---------')
+for i in range(len(DFA)):
+    if DFA[i].Tag == Tags[0]:
+        print(DFA[i].Name,'|', DFA[i].Nueighbor['a'],DFA[i].Nueighbor['b'],'|',DFA[i].Tag)
+print('   ','---------')
+for i in range(len(DFA)):
+    if DFA[i].Tag == Tags[1]:
+        print(DFA[i].Name,'|',DFA[i].Nueighbor['a'],DFA[i].Nueighbor['b'],'|',DFA[i].Tag)
+print('   ','---------')
 
 
 
