@@ -143,7 +143,7 @@ class Finite_Automata:
         # number of dfa state
         dfa.Number_State = number_dfa_nodes + 1
 
-
+Info = []
 class App:
     def __init__(self, file_address):
         self.file_address = file_address
@@ -155,6 +155,7 @@ class App:
         # read file
         Lines = open(self.file_address, 'r').readlines()
         self.Alphabet = Lines[1].replace('\n', '').split(',')
+        Info = self.Alphabet.copy()
         NFA_Alphabet = self.Alphabet + ["_"]
         self.NFA = Finite_Automata(NFA_Alphabet, int(Lines[0]), 'nfa')
         self.NFA.Start_Variable = self.NFA.States[0]
@@ -221,13 +222,14 @@ App = App("input.txt")
 App.creat_NFA()
 App.convert_NFA_to_DFA()
 App.print_DFA()
-
+Info = App.Alphabet
 DFA = App.DFA.States
 DF = DFA.copy()
 print('    a', ' b')
 for i in range(len(DFA)):
-    print(DFA[i].Name, DFA[i].Nueighbor['a'].Name, DFA[i].Nueighbor['b'].Name)
-
+    print(DFA[i].Name, DFA[i].Nueighbor[Info[0]].Name, DFA[i].Nueighbor[Info[1]].Name)
+# for i in range(len(DFA)):
+#     print(DFA[i].Name, DFA[i].Nueighbor['a'].Name, DFA[i].Nueighbor['b'].Name)
 Final_States = []
 Non_Final_States = []
 l = 0
@@ -250,17 +252,20 @@ def Tag():
     S = len(States)
     K = []
     SS = []
-    N = []
     for i in range(S):
+        T = True
         for j in range(i,S):
+            T = True
             if i != j:
                 if j < S:
                     if States[i].Tag == States[j].Tag:
-                        if States[i].Nueighbor['a'] == States[j].Nueighbor['a'] and States[i].Nueighbor['b'] == \
-                                States[j].Nueighbor['b']:
+                        for symbol in Info:
+                            if States[i].Nueighbor[symbol] == States[j].Nueighbor[symbol]:
+                                T = True
+                            else:
+                                T = False
+                        if T:
                             K.append(States[i].Tag)
-                            N.append(States[j].Nueighbor['a'].Tag)
-                            N.append(States[j].Nueighbor['b'].Tag)
                             SS.append(States[i])
                             States[i].Tag = 'g' + str(v) + str(l)
                             Tags.append(States[i].Tag)
@@ -277,12 +282,20 @@ def Tag():
                             S -= 2
     ss = len(States)
     for i in range(ss):
+        T = True
         if i >= ss:
             i -= 1
         for j in range(len(SS)):
+            T = True
             if States[i].Tag == K[0]:
-                if States[i].Nueighbor['a'].Name == SS[j].Name and States[i].Nueighbor['b'].Name == \
-                        SS[j].Nueighbor['b'].Name:
+                for symbol in Info:
+                    if States[i].Nueighbor[symbol].Name == SS[j].Name:
+                        T = True
+                    elif States[i].Nueighbor[symbol].Name == SS[j].Nueighbor[symbol].Name:
+                        T = True
+                    else:
+                        T = False
+                if T:
                     a = SS[j].Tag[-1]
                     States[i].Tag = 'g' + str(v) + a
                     States.remove(States[i])
@@ -293,58 +306,66 @@ def Tag():
         Tags.append(States[i].Tag)
         l += 1
     for i in range(len(DFA)):
-        DFA[i].Nueighbor['a'] = DFA[i].Nueighbor['a'].Tag
-        DFA[i].Nueighbor['b'] = DFA[i].Nueighbor['b'].Tag
+        for symbol in Info:
+            if type(DFA[i].Nueighbor[symbol]) is str:
+                DFA[i].Nueighbor[symbol] = DFA[i].Nueighbor[symbol]
+            else:
+                DFA[i].Nueighbor[symbol] = DFA[i].Nueighbor[symbol].Tag
+
 
 
 Tag()
 # tag()
-for tag in Tags:
-    for i in range(len(DFA)):
-        for j in range(len(DFA)):
-            if DFA[i].Tag == tag:
-                if DFA[i].Tag == DFA[j].Tag:
-                    if DFA[i].Nueighbor['a'] != DFA[j].Nueighbor['a'] or DFA[i].Nueighbor['b'] != DFA[j].Nueighbor['b']:
-                        print('1')
-                        Tag()
-print('      a', '  b', '   tag')
-print('   ', '---------')
-for j in range(len(Tags)):
-    for i in range(len(DFA)):
-        if DFA[i].Tag == Tags[j]:
-            print(DFA[i].Name, '|', DFA[i].Nueighbor['a'], DFA[i].Nueighbor['b'], '|', DFA[i].Tag)
-    print('   ', '---------')
+# for tag in Tags:
+#     for i in range(len(DFA)):
+#         for j in range(len(DFA)):
+#             if DFA[i].Tag == tag:
+#                 if DFA[i].Tag == DFA[j].Tag:
+#                     for symbol in Info:
+#                         if States[i].Nueighbor[symbol] == States[j].Nueighbor[symbol]:
+#                             T = False
+#                         else:
+#                             T = True
+#                     if T:
+#                         print('1')
+#                         Tag()
+# print('      a', '  b', '   tag')
+# print('   ', '---------')
+# for j in range(len(Tags)):
+#     for i in range(len(DFA)):
+#         if DFA[i].Tag == Tags[j]:
+#             print(DFA[i].Name, '|', DFA[i].Nueighbor[Info[0]], DFA[i].Nueighbor[Info[1]], '|', DFA[i].Tag)
+#     print('   ', '---------')
 #
 for i in range(len(St)):
     St[i].Name = 'g' + str(i + 1)
 for i in range(len(St)):
     if St[i].Final_state:
         St[i].Name = '*g' + str(i + 1)
-print('      a', '  b', '   tag')
-print('   ', '---------')
-for j in range(len(Tags)):
-    for i in range(len(St)):
-        if St[i].Tag == Tags[j]:
-            print(St[i].Name, '|', St[i].Nueighbor['a'], St[i].Nueighbor['b'], '|', St[i].Tag)
-    print('   ', '---------')
+# print('      a', '  b', '   tag')
+# print('   ', '---------')
+# for j in range(len(Tags)):
+#     for i in range(len(St)):
+#         if St[i].Tag == Tags[j]:
+#             print(St[i].Name, '|', St[i].Nueighbor[Info[0]], St[i].Nueighbor[Info[1]], '|', St[i].Tag)
+#     print('   ', '---------')
 for i in range(len(St)):
     for j in range(len(St)):
-        if St[i].Nueighbor['a'] == St[j].Tag:
-            St[i].Nueighbor['a'] = St[j].Name
-        if St[i].Nueighbor['b'] == St[j].Tag:
-            St[i].Nueighbor['b'] = St[j].Name
+        for symbol in Info:
+            if St[i].Nueighbor[symbol] == St[j].Tag:
+                St[i].Nueighbor[symbol] = St[j].Name
 #
-print('      a', '  b')
-print('   ', '-------')
-for j in range(len(Tags)):
-    for i in range(len(St)):
-        if St[i].Tag == Tags[j]:
-            print(St[i].Name, '|', St[i].Nueighbor['a'], St[i].Nueighbor['b'])
-    print('   ', '-------')
+# print('      a', '  b')
+# print('   ', '-------')
+# for j in range(len(Tags)):
+#     for i in range(len(St)):
+#         if St[i].Tag == Tags[j]:
+#             print(St[i].Name, '|', St[i].Nueighbor[Info[0]], St[i].Nueighbor[Info[1]])
+#     print('   ', '-------')
 Alphabet = ['a', 'b']
 print(len(St))
 for i in range(len(St)):
-    for sy in Alphabet:
+    for sy in Info:
         if i == 0 :
             result = '->' + St[i].Name + ',' + sy + ',' + St[i].Nueighbor[sy]
             print(result)
