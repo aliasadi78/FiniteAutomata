@@ -1,3 +1,4 @@
+
 class queue:
     def __init__(self):
         self.queue = []
@@ -282,8 +283,9 @@ def Tag():
                             l += 1
                             S -= 2
     ss = len(States)
+    T = False
     for i in range(ss):
-        T = True
+        # T = True
         if i >= ss:
             i -= 1
         for j in range(len(SS)):
