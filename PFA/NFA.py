@@ -226,11 +226,7 @@ App.print_DFA()
 Info = App.Alphabet
 DFA = App.DFA.States
 DF = DFA.copy()
-print('    a', ' b')
-for i in range(len(DFA)):
-    print(DFA[i].Name, DFA[i].Nueighbor[Info[0]].Name, DFA[i].Nueighbor[Info[1]].Name)
-# for i in range(len(DFA)):
-#     print(DFA[i].Name, DFA[i].Nueighbor['a'].Name, DFA[i].Nueighbor['b'].Name)
+
 Final_States = []
 Non_Final_States = []
 l = 0
@@ -333,44 +329,27 @@ for tag in Tags:
                         print(tag,i,j,DFA[i].Nueighbor[symbol],DFA[j].Nueighbor[symbol])
                         Tag()
                         break
-print('      a', '  b', '   tag')
-print('   ', '---------')
-for j in range(len(Tags)):
-    for i in range(len(DFA)):
-        if DFA[i].Tag == Tags[j]:
-            print(DFA[i].Name, '|', DFA[i].Nueighbor[Info[0]], DFA[i].Nueighbor[Info[1]], '|', DFA[i].Tag)
-    print('   ', '---------')
+
 #
 for i in range(len(St)):
     St[i].Name = 'g' + str(i + 1)
 for i in range(len(St)):
     if St[i].Final_state:
         St[i].Name = '*g' + str(i + 1)
-print('      a', '  b', '   tag')
-print('   ', '---------')
-for j in range(len(Tags)):
-    for i in range(len(St)):
-        if St[i].Tag == Tags[j]:
-            print(St[i].Name, '|', St[i].Nueighbor[Info[0]], St[i].Nueighbor[Info[1]], '|', St[i].Tag)
-    print('   ', '---------')
+
 for i in range(len(St)):
     for j in range(len(St)):
         for symbol in Info:
             if St[i].Nueighbor[symbol] == St[j].Tag:
                 St[i].Nueighbor[symbol] = St[j].Name
-#
-print('      a', '  b')
-print('   ', '-------')
-for j in range(len(Tags)):
-    for i in range(len(St)):
-        if St[i].Tag == Tags[j]:
-            print(St[i].Name, '|', St[i].Nueighbor[Info[0]], St[i].Nueighbor[Info[1]])
-    print('   ', '-------')
-Alphabet = ['a', 'b']
+
 print(len(St))
 re = ''
-for i in Info:
-    re += i + ','
+for i in range(len(Info)):
+    if i != len(Info) - 1:
+        re += Info[i] + ','
+    else:
+        re += Info[i]
 print(re)
 for i in range(len(St)):
     for sy in Info:
