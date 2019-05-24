@@ -1,4 +1,4 @@
-from NODE import *
+from Node import *
 from Finite_Automata import *
 class queue:
     def __init__(self):
