@@ -1,4 +1,20 @@
-import queue,Node,Finite_automata                                   
+from NODE import *
+from Finite_Automata import *
+class queue:
+    def __init__(self):
+        self.queue=[]
+        self.size=0
+    def enqueue(self,item):
+        self.queue+=[item]
+        self.size+=1
+    def dequeue(self):
+        if self.size>0:
+            item=self.queue[0]
+            del self.queue[0]
+            self.size-=1
+            return item
+        
+
 class App:
     def __init__(self,file_address):
         self.file_address=file_address
@@ -11,8 +27,7 @@ class App:
         self.Alphabet=Lines[1].replace('\n','').split(',')
         NFA_Alphabet=self.Alphabet+["_"]
         self.NFA=Finite_Automata(NFA_Alphabet,int(Lines[0]),'nfa')
-        info=Lines[2].split(',')
-        self.NFA.Start_Variable=self.NFA.States[int(info[0].split('q')[1])]
+        self.NFA.Start_Variable=self.NFA.States[0]
         #complete nfa"
         for line in range(2,len(Lines)):
             info=Lines[line].split(',')
