@@ -1,4 +1,4 @@
-import queue,NODE,Finite_Automata                                   
+import queue,Node,Finite_automata                                   
 class App:
     def __init__(self,file_address):
         self.file_address=file_address
