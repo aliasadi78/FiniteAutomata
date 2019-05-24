@@ -315,7 +315,7 @@ def Tag():
 
 
 Tag()
-# tag()
+
 for tag in Tags:
     T = False
     for i in range(len(DFA)):
@@ -329,8 +329,6 @@ for tag in Tags:
                         print(tag,i,j,DFA[i].Nueighbor[symbol],DFA[j].Nueighbor[symbol])
                         Tag()
                         break
-
-#
 for i in range(len(St)):
     St[i].Name = 'g' + str(i + 1)
 for i in range(len(St)):
