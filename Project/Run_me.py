@@ -1,5 +1,5 @@
 from Node import *
-from Finite_Automata import *
+from Finite_automata import *
 class queue:
     def __init__(self):
         self.queue=[]
