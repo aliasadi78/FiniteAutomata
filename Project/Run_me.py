@@ -29,7 +29,6 @@ class App:
         self.Alphabet=Lines[1].replace('\n','').split(',')
         NFA_Alphabet=self.Alphabet+["_"]
         self.NFA=Finite_Automata(NFA_Alphabet,int(Lines[0]),'nfa')
-        self.NFA.Start_Variable=self.NFA.States[0]
         #reduce state numbert to start at zero
         minimum=int(Lines[2].split(',')[0].split('q')[1])
         for line in range(2,len(Lines)):
@@ -40,6 +39,8 @@ class App:
             destination_index=int(info[2].replace('\n','').split('q')[1])
             if destination_index < minimum:
                 minimum=destination_index
+        #set start variable
+        self.NFA.Start_Variable=self.NFA.States[int(Lines[2].split(',')[0].split('q')[1])-minimum]
         #complete nfa"
         for line in range(2,len(Lines)):
             info=Lines[line].split(',')
