@@ -128,7 +128,7 @@ l = 1
 States = DFA.copy()
 St = DFA.copy()
 Tags = []
-v = [1]
+v = [1 , 'T']
 def Tag():
     tags = Tags.copy()
     Tags.clear()
@@ -166,7 +166,6 @@ def Tag():
     ss = len(States)
     T = False
     for i in range(ss):
-        # T = True
         if i >= ss:
             i -= 1
         for j in range(len(SS)):
@@ -197,23 +196,32 @@ def Tag():
             else:
                 DFA[i].Nueighbor[symbol] = DFA[i].Nueighbor[symbol].Tag
     v[0] += 1
+    for tag in Tags:
+        v[1] = False
+        for i in range(len(DFA)):
+            for j in range(len(DFA)):
+                if DFA[i].Tag == tag:
+                    if DFA[i].Tag == DFA[j].Tag:
+                        for symbol in Info:
+                            if DFA[i].Nueighbor[symbol] != DFA[j].Nueighbor[symbol]:
+                                v[1] = True
+
 
 
 Tag()
-
-for tag in Tags:
-    T = False
-    for i in range(len(DFA)):
-        for j in range(len(DFA)):
-            if DFA[i].Tag == tag:
-                if DFA[i].Tag == DFA[j].Tag:
-                    for symbol in Info:
-                        if DFA[i].Nueighbor[symbol] != DFA[j].Nueighbor[symbol]:
-                            T = True
-                    if T:
-                        print(tag,i,j,DFA[i].Nueighbor[symbol],DFA[j].Nueighbor[symbol])
-                        Tag()
-                        break
+while(v[1] == True):
+    for tag in Tags:
+        T = False
+        for i in range(len(DFA)):
+            for j in range(len(DFA)):
+                if DFA[i].Tag == tag:
+                    if DFA[i].Tag == DFA[j].Tag:
+                        for symbol in Info:
+                            if DFA[i].Nueighbor[symbol] != DFA[j].Nueighbor[symbol]:
+                                T = True
+                        if T:
+                            print(tag,i,j,DFA[i].Nueighbor[symbol],DFA[j].Nueighbor[symbol])
+                            Tag()
 
 
 for i in range(len(St)):
