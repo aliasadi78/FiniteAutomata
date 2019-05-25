@@ -108,6 +108,7 @@ App.creat_NFA()
 App.convert_NFA_to_DFA()
 App.print_DFA()
 
+
 Info = App.Alphabet
 DFA = App.DFA.States
 DF = DFA.copy()
@@ -226,19 +227,22 @@ for i in range(len(St)):
             if St[i].Nueighbor[symbol] == St[j].Tag:
                 St[i].Nueighbor[symbol] = St[j].Name
 
-print(len(St))
+File=open("output.txt",'a')
+File.write('\n'+str(len(St))+'\n')
 re = ''
 for i in range(len(Info)):
     if i != len(Info) - 1:
         re += Info[i] + ','
     else:
         re += Info[i]
-print(re)
+File.write(re+'\n')
 for i in range(len(St)):
     for sy in Info:
         if i == 0 :
             result = '->' + St[i].Name + ',' + sy + ',' + St[i].Nueighbor[sy]
-            print(result)
+            File.write(result+'\n')
         else:
             result = St[i].Name + ',' + sy + ',' + St[i].Nueighbor[sy]
-            print(result)
+            File.write(result+'\n')
+File.close()
+
