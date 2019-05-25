@@ -111,18 +111,16 @@ l = 1
 States = DFA.copy()
 St = DFA.copy()
 Tags = []
+v = [1]
 def Tag():
     tags = Tags.copy()
     Tags.clear()
-    v = 1
     l = 1
     S = len(States)
     K = []
     SS = []
     for i in range(S):
-        # T = False
         for j in range(i,S):
-            # T = False
             if i != j:
                 if j < S:
                     if States[i].Tag == States[j].Tag:
@@ -135,9 +133,9 @@ def Tag():
                         if T:
                             K.append(States[i].Tag)
                             SS.append(States[i])
-                            States[i].Tag = 'g' + str(v) + str(l)
+                            States[i].Tag = 'g' + str(v[0]) + str(l)
                             Tags.append(States[i].Tag)
-                            States[j].Tag = 'g' + str(v) + str(l)
+                            States[j].Tag = 'g' + str(v[0]) + str(l)
                             States.remove(States[i])
                             States.insert(i,'1')
                             if States[j] == '1':
@@ -167,7 +165,7 @@ def Tag():
                             break
                 if T:
                     a = SS[j].Tag[-1]
-                    States[i].Tag = 'g' + str(v) + a
+                    States[i].Tag = 'g' + str(v[0]) + a
                     States.remove(States[i])
                     St.remove(St[i])
                     ss -= 1
@@ -181,11 +179,11 @@ def Tag():
                 DFA[i].Nueighbor[symbol] = DFA[i].Nueighbor[symbol]
             else:
                 DFA[i].Nueighbor[symbol] = DFA[i].Nueighbor[symbol].Tag
-
+    v[0] += 1
 
 
 Tag()
-# tag()
+
 for tag in Tags:
     T = False
     for i in range(len(DFA)):
@@ -200,7 +198,7 @@ for tag in Tags:
                         Tag()
                         break
 
-#
+
 for i in range(len(St)):
     St[i].Name = 'g' + str(i + 1)
 for i in range(len(St)):
