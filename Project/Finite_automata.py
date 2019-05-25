@@ -1,4 +1,4 @@
-
+from Node import *
 class queue:
     def __init__(self):
         self.queue = []
@@ -32,12 +32,12 @@ class NODE:
 
 
 # class for dfa and nfa"
+#class for dfa and nfa"
 class Finite_Automata:
     def __init__(self, Alphabet, Number_state, dfa_or_nfa):
         self.Start_Variable = None
         self.Alphabet = Alphabet
         self.Number_State = Number_state
-
         # list of states of finite automata for acsess them
         self.States = []
 
@@ -50,10 +50,24 @@ class Finite_Automata:
 
     # sort list of nodes for checking new_list==dfa_states[i] base of bubble sort"
     def sort_nodes_list(self, nodes_list):
+        #list of states of finite automata for acsess them
+        self.States=[]
+        #build states for nfa beacuse know them"
+        if dfa_or_nfa=="nfa":
+            for number in range(Number_state):
+                name='q'+str(number)
+                new_node=NODE(name,self.Alphabet)
+                self.States+=[new_node]
+
+
+                
+    #sort list of nodes for checking new_list==dfa_states[i] base of bubble sort"
+    def sort_nodes_list(self,nodes_list):
         n = len(nodes_list)
         # Traverse through all array elements
         for i in range(n):
             # Last i elements are already in place
+
             for j in range(0, n - i - 1):
                 if nodes_list[j].Name > nodes_list[j + 1].Name:
                     nodes_list[j], nodes_list[j + 1] = nodes_list[j + 1], nodes_list[j]
@@ -61,6 +75,17 @@ class Finite_Automata:
     # lambda covert for find all lambda transition"
     def lambda_convert(self, states):
         state_queue = queue()
+
+            for j in range(0, n-i-1):
+                if nodes_list[j].Name > nodes_list[j+1].Name :
+                    nodes_list[j], nodes_list[j+1] = nodes_list[j+1], nodes_list[j]
+
+
+
+                    
+    #lambda covert for find all lambda transition in states in list"
+    def lambda_convert(self,states):
+        state_queue=queue()
         for state in states:
             state_queue.enqueue(state)
         while state_queue.size > 0:
@@ -74,6 +99,10 @@ class Finite_Automata:
     # symbol convert"
     def symbol_convert(self, states, symbol):
         result_list = []
+    
+    #symbol convert"
+    def symbol_convert(self,states,symbol):
+        result_list=[]
         for state in states:
             for nueighbor in state.Nueighbor[symbol]:
                 if nueighbor not in result_list:
@@ -106,10 +135,34 @@ class Finite_Automata:
         state_queue.enqueue(new_dfa_node)
 
         # add one by one dfa states to queue and find this transiton"
+    def convert_nfa_to_dfa(self,dfa):
+        dfa_states=[]
+        #add start varieble and lambda transition to dfa state"
+        dfa_states+=[self.lambda_convert([self.Start_Variable])]
+        
+        #after build list of nfa states for each dfs node should sort this for compare in futur
+        self.sort_nodes_list(dfa_states[0])
+
+        #number of states in dfa
+        number_dfa_nodes=0
+        
+        #creat first dfa node"
+        name="q0"
+        new_dfa_node=NODE(name,dfa.Alphabet)
+        dfa.Start_Variable=new_dfa_node
+        new_dfa_node.nfa_states=dfa_states[0]
+        #add new state to dfa states"
+        dfa.States+=[new_dfa_node]
+        #end creat"
+
+        #creat queue to check tansition of all of new node in dfa "
+        state_queue=queue()
+        state_queue.enqueue(new_dfa_node)
+        
+        #add one by one dfa states to queue and find this transiton"
         while state_queue.size > 0:
             current_node = state_queue.dequeue()
             for symbol in dfa.Alphabet:
-
                 # bolean for check the new list of nfa nodes created befor
                 creat_new_node = True
 
@@ -142,7 +195,7 @@ class Finite_Automata:
                             break
 
         # number of dfa state
-        dfa.Number_State = number_dfa_nodes + 1
+            dfa.Number_State = number_dfa_nodes + 1
 
 Info = []
 class App:
@@ -357,3 +410,4 @@ for i in range(len(St)):
         else:
             result = St[i].Name + ',' + sy + ',' + St[i].Nueighbor[sy]
             print(result)
+
