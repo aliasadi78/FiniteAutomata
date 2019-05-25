@@ -23,16 +23,28 @@ class App:
         self.Alphabet=None
     def creat_NFA(self):
         #read file
-        Lines=open(self.file_address,'r').readlines()
+        File=open(self.file_address,'r')
+        Lines=File.readlines()
+        File.close()
         self.Alphabet=Lines[1].replace('\n','').split(',')
         NFA_Alphabet=self.Alphabet+["_"]
         self.NFA=Finite_Automata(NFA_Alphabet,int(Lines[0]),'nfa')
         self.NFA.Start_Variable=self.NFA.States[0]
-        #complete nfa"
+        #reduce state numbert to start at zero
+        minimum=int(Lines[2].split(',')[0].split('q')[1])
         for line in range(2,len(Lines)):
             info=Lines[line].split(',')
             origin_index=int(info[0].split('q')[1])
+            if origin_index < minimum:
+                minimum=origin_index
             destination_index=int(info[2].replace('\n','').split('q')[1])
+            if destination_index < minimum:
+                minimum=destination_index
+        #complete nfa"
+        for line in range(2,len(Lines)):
+            info=Lines[line].split(',')
+            origin_index=int(info[0].split('q')[1])-minimum
+            destination_index=int(info[2].replace('\n','').split('q')[1])-minimum
             self.NFA.States[origin_index].Nueighbor[info[1]]+=[self.NFA.States[destination_index]]
             #final states"
             if "*" in info[0]:
@@ -45,14 +57,16 @@ class App:
         self.NFA.convert_nfa_to_dfa(self.DFA)
 
     def print_DFA(self):
+        #open file to write into
+        File=open("output.txt",'w')
         #print number of states
-        print(self.DFA.Number_State)
+        File.write(str(self.DFA.Number_State)+'\n')
 
         #print Alphabet
         result=''
         for symbol in self.Alphabet:
             result+=symbol+','
-        print(result)
+        File.write(result+'\n')
 
         #print start variable with this transition
         if self.DFA.States[0].Final_state:
@@ -68,7 +82,7 @@ class App:
                 dest_str=self.DFA.States[0].Nueighbor[symbol].Name
 
             result=origin_str+','+symbol+','+dest_str
-            print(result)
+            File.write(result+'\n')
 
         #print other state with them transition
         for state_index in range(1,self.DFA.Number_State):
@@ -85,7 +99,8 @@ class App:
                     dest_str=self.DFA.States[state_index].Nueighbor[symbol].Name
 
                 result=origin_str+','+symbol+','+dest_str
-                print(result)
+                File.write(result+'\n')
+        File.close()
 
 
 App=App("input.txt")
